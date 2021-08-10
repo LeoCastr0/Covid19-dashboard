@@ -84,7 +84,7 @@ function handlerChange() {
 
 function loadData(data) {
     let yConfirmedDelta = data[1].Confirmed - data[0].Confirmed
-    let yDeathDelta = data[1].Deaths - data[0].Death
+    let yDeathDelta = data[1].Deaths - data[0].Deaths
     let yRecoveredDelta = data[1].Recovered - data[0].Recovered
     let yActiveDelta = data[1].Active - data[0].Active
 
@@ -105,21 +105,21 @@ function loadData(data) {
     document.getElementById("actives").innerText = "Total Ativos"
 
     insertDailyData(
-        "confirmed",
+        "tconfirmed",
         tConfirmedDelta,
-        tConfirmedDelta < yConfirmedDelta
+        tConfirmedDelta > yConfirmedDelta
     )
-    insertDailyData("tdeath", tDeathDelta, tDeathDelta < yDeathDelta)
+    insertDailyData("tdeath", tDeathDelta, tDeathDelta > yDeathDelta)
     insertDailyData(
         "trecovered",
         tRecoveredDelta,
-        tRecoveredDelta < yRecoveredDelta
+        tRecoveredDelta > yRecoveredDelta
     )
-    insertDailyData("tactive", tActiveDelta, tActiveDelta < yActiveDelta)
+    insertDailyData("tactive", tActiveDelta, tActiveDelta > yActiveDelta)
 }
 
 function insertDailyData(element, value, increase) {
-    if (!increase) {
+    if (increase) {
         document.getElementById(
             element
         ).innerHTML = `<img src = '../covid-dashboard-base/assets/img/up.png'> Diário ${value.toLocaleString(
